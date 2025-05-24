@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hospital.Repositories
 {
-    class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext() : base("DefaultConnection")
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
-        }
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
         }
     }
 }
