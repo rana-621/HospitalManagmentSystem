@@ -1,4 +1,4 @@
-﻿namespace hospitals.Utilitie;
+﻿namespace hospitals.Utilities;
 
 public class DbInitializer
 {

@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.ViewModels", "Hosp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Repositories", "Hospital.Repositories\Hospital.Repositories.csproj", "{8CF79C92-C84A-4637-9322-F6A8ACC4A3DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hospitals.Utilitie", "hospitals.Utilitie\hospitals.Utilitie.csproj", "{85F06B8B-CD01-4F11-93ED-9286A7AAB7F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hospitals.Utilities", "hospitals.Utilitie\hospitals.Utilities.csproj", "{85F06B8B-CD01-4F11-93ED-9286A7AAB7F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
