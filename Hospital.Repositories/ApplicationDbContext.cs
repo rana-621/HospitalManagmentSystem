@@ -13,5 +13,7 @@ namespace Hospital.Repositories
 
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Bill> Bills { get; set; }
     }
 }
