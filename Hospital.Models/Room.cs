@@ -7,8 +7,5 @@ public class Room
     public string Type { get; set; }
     public string Status { get; set; }
     public string HospitalId { get; set; }
-    public Hospital Hospital
-    {
-        get; set;
-    }
+    public Hospital Hospital { get; set; }
 }
