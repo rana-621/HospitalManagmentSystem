@@ -27,6 +27,6 @@ namespace Hospital.Repositories
         public DbSet<PrescribedMedicine> PrescribedMedicines { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-
+        public DbSet<TestPrice> TestPrices { get; set; }
     }
 }
