@@ -241,8 +241,7 @@ namespace Hospital.Repositories.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HospitalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HospitalId1 = table.Column<int>(type: "int", nullable: false),
+                    HospitalId = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -250,8 +249,8 @@ namespace Hospital.Repositories.Migrations
                 {
                     table.PrimaryKey("PK_Contacts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contacts_HospitalInfos_HospitalId1",
-                        column: x => x.HospitalId1,
+                        name: "FK_Contacts_HospitalInfos_HospitalId",
+                        column: x => x.HospitalId,
                         principalTable: "HospitalInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -266,15 +265,14 @@ namespace Hospital.Repositories.Migrations
                     RoomNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HospitalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HospitalId1 = table.Column<int>(type: "int", nullable: false)
+                    HospitalId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rooms_HospitalInfos_HospitalId1",
-                        column: x => x.HospitalId1,
+                        name: "FK_Rooms_HospitalInfos_HospitalId",
+                        column: x => x.HospitalId,
                         principalTable: "HospitalInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -425,9 +423,9 @@ namespace Hospital.Repositories.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contacts_HospitalId1",
+                name: "IX_Contacts_HospitalId",
                 table: "Contacts",
-                column: "HospitalId1");
+                column: "HospitalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Labs_PatientId",
@@ -470,9 +468,9 @@ namespace Hospital.Repositories.Migrations
                 column: "PatientReportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rooms_HospitalId1",
+                name: "IX_Rooms_HospitalId",
                 table: "Rooms",
-                column: "HospitalId1");
+                column: "HospitalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TestPrices_BillId",

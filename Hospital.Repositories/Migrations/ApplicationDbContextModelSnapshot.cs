@@ -125,11 +125,7 @@ namespace Hospital.Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HospitalId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HospitalId1")
+                    b.Property<int>("HospitalId")
                         .HasColumnType("int");
 
                     b.Property<string>("Phone")
@@ -138,7 +134,7 @@ namespace Hospital.Repositories.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HospitalId1");
+                    b.HasIndex("HospitalId");
 
                     b.ToTable("Contacts");
                 });
@@ -432,11 +428,7 @@ namespace Hospital.Repositories.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("HospitalId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HospitalId1")
+                    b.Property<int>("HospitalId")
                         .HasColumnType("int");
 
                     b.Property<string>("RoomNumber")
@@ -453,7 +445,7 @@ namespace Hospital.Repositories.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HospitalId1");
+                    b.HasIndex("HospitalId");
 
                     b.ToTable("Rooms");
                 });
@@ -790,7 +782,7 @@ namespace Hospital.Repositories.Migrations
                 {
                     b.HasOne("Hospital.Models.HospitalInfo", "Hospital")
                         .WithMany("Contacts")
-                        .HasForeignKey("HospitalId1")
+                        .HasForeignKey("HospitalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -874,7 +866,7 @@ namespace Hospital.Repositories.Migrations
                 {
                     b.HasOne("Hospital.Models.HospitalInfo", "Hospital")
                         .WithMany("Rooms")
-                        .HasForeignKey("HospitalId1")
+                        .HasForeignKey("HospitalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
