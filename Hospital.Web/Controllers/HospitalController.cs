@@ -12,9 +12,10 @@ namespace Hospital.Web.Controllers
             _hospitalInfo = hospitalInfo;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber = 1, int pageSize = 1)
         {
-            return View();
+            return View(_hospitalInfo.GetAll(pageNumber, pageSize));
         }
+
     }
 }
