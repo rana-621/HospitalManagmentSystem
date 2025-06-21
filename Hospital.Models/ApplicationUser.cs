@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hospital.Models;
 
@@ -11,6 +12,7 @@ public class ApplicationUser : IdentityUser
     public DateTime DOF { get; set; }
     public string Specialist { get; set; }
     public Department Department { get; set; }
+    [NotMapped]
     public ICollection<Appointment> Appointments { get; set; }
     public ICollection<Payroll> Payrolls { get; set; }
 
