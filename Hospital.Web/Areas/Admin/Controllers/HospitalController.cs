@@ -2,8 +2,9 @@
 using Hospital.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Hospital.Web.Controllers
+namespace Hospital.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class HospitalController : Controller
     {
 
@@ -13,7 +14,7 @@ namespace Hospital.Web.Controllers
             _hospitalInfo = hospitalInfo;
         }
 
-        public IActionResult Index(int pageNumber = 1, int pageSize = 1)
+        public IActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
             return View(_hospitalInfo.GetAll(pageNumber, pageSize));
         }

@@ -22,32 +22,36 @@ public class HospitalInfoService : IHospitalInfo
 
     public PagedResult<HospitalInfoViewModel> GetAll(int pageNumber, int pageSize)
     {
-        var vm = new HospitalInfoViewModel();
         int totalCount;
+        List<HospitalInfoViewModel> vmList = new();
 
-        List<HospitalInfoViewModel> vmList = new List<HospitalInfoViewModel>();
         try
         {
-            int ExcludedRecords = (pageSize * pageNumber) - pageSize;
+            pageNumber = pageNumber <= 0 ? 1 : pageNumber;
+            pageSize = pageSize <= 0 ? 10 : pageSize;
 
-            var modelList = _unitOfWork.GenericRepository<HospitalInfo>().GetAll().Skip(ExcludedRecords).Take(pageSize).ToList();
-            totalCount = _unitOfWork.GenericRepository<HospitalInfo>().GetAll().ToList().Count();
+            int excludedRecords = (pageSize * pageNumber) - pageSize;
 
-            vmList = ConvertModelToViewModelList(modelList);
+            var allData = _unitOfWork.GenericRepository<HospitalInfo>().GetAll();
+            totalCount = allData.Count();
+
+            var pagedData = allData.Skip(excludedRecords).Take(pageSize).ToList();
+            vmList = ConvertModelToViewModelList(pagedData);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             throw;
         }
-        var result = new PagedResult<HospitalInfoViewModel>
+
+        return new PagedResult<HospitalInfoViewModel>
         {
             Data = vmList,
             TotalItems = totalCount,
             PageNumber = pageNumber,
             PageSize = pageSize
         };
-        return result;
     }
+
 
     public HospitalInfoViewModel GetHospitalById(int id)
     {

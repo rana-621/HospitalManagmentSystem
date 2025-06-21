@@ -49,8 +49,9 @@ namespace Hospital.Web
             app.UseAuthorization();
             app.MapRazorPages();
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{Area=Patient}/{controller=Home}/{action=Index}/{id?}");
+                name: "areas",
+                pattern: "{Area=Admin}/{controller=Hospital}/{action=Index}/{id?}");
+
 
             app.Run();
         }
