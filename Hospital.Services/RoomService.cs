@@ -29,7 +29,7 @@ public class RoomService : IRoomService
         {
             int ExcludedRecords = (pageSize * pageNumber) - pageSize;
 
-            var modelList = _unitOfWork.GenericRepository<Room>().GetAll().Skip(ExcludedRecords).Take(pageSize).ToList();
+            var modelList = _unitOfWork.GenericRepository<Room>().GetAll(includeProperties: "Hospital").Skip(ExcludedRecords).Take(pageSize).ToList();
 
             totalCount = _unitOfWork.GenericRepository<Room>().GetAll().Count();
 

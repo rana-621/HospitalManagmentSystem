@@ -1,5 +1,7 @@
-﻿@using hospitals.Utilities
-@model PagedResult<Hospital.ViewModels.HospitalInfoViewModel>
+﻿@* @using cloudscribe.Pagination.Models *@
+@using hospitals.Utilities
+
+@model PagedResult<Hospital.ViewModels.RoomViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -17,19 +19,16 @@
                 Id
             </th>
             <th>
-                Name
+                RoomNumber
             </th>
             <th>
                 Type
             </th>
             <th>
-               City
+                Status
             </th>
             <th>
-                PinCode
-            </th>
-            <th>
-                Country
+                HospitalInfoId
             </th>
             <th></th>
         </tr>
@@ -41,19 +40,16 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.RoomNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City)
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PinCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
+                @Html.DisplayFor(modelItem => item.HospitalInfo.Name)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -65,14 +61,13 @@
     </tbody>
 </table>
 
+
+
 <cs-pager cs-paging-pagesize=(int)Model.PageSize
           cs-paging-pagenumber=(int)Model.PageNumber
           cs-paging-totalitems=(int)Model.TotalItems
           cs-pagenumber-patam="pageNumber"
-          asp-controller="Hospital"
-
-
- 
+          asp-controller="Rooms"
           asp-action="Index"
           cs-pager-li-current-class="page-item active"
           cs-pager-li-other-class="page-item"
