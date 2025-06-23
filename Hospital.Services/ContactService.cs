@@ -34,7 +34,7 @@ public class ContactService : IContactService
             int ExcludeRecordes = (pageSize * pageNumber) - pageSize;
 
             var modelList = _unitOfWork.GenericRepository<Contacts>()
-                .GetAll()
+                .GetAll(includeProperties: "Hospital")
                 .Skip(ExcludeRecordes)
                 .Take(pageSize)
                 .ToList();

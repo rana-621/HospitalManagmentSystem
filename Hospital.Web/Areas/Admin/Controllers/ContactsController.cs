@@ -1,7 +1,6 @@
 ﻿using Hospital.Services;
 using Hospital.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Hospital.Web.Areas.Admin.Controllers;
 
@@ -39,10 +38,14 @@ public class ContactsController : Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        ViewBag.hopital = new SelectList(_hospitalInfo.GetAll(), "Id", "Name");
-        var viewModel = _contact.GetContactById(id);
+        //ViewBag.hopital = new SelectList(_hospitalInfo.GetAll(), "Id", "Name");
+        //var viewModel = _contact.GetContactById(id);
 
-        return View(viewModel);
+        //return View(viewModel);
+
+        var contact = _contact.GetContactById(id);
+
+        return View(contact);
     }
     [HttpPost]
     public IActionResult Edit(ContactViewModel contactViewModel)

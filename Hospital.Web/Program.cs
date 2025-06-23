@@ -30,6 +30,7 @@ namespace Hospital.Web
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddTransient<IHospitalInfo, HospitalInfoService>();
             builder.Services.AddTransient<IRoomService, RoomService>();
+            builder.Services.AddTransient<IContactService, ContactService>();
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
