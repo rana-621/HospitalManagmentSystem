@@ -11,6 +11,8 @@ public class ApplicationUser : IdentityUser
     public string Address { get; set; }
     public DateTime DOF { get; set; }
     public string Specialist { get; set; }
+    public bool IsDoctor { get; set; }
+    public string PictureUrl { get; set; }
     public Department Department { get; set; }
     [NotMapped]
     public ICollection<Appointment> Appointments { get; set; }
