@@ -724,10 +724,10 @@ namespace Hospital.Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DOF")
+                    b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<int>("Gender")
@@ -844,7 +844,7 @@ namespace Hospital.Repositories.Migrations
             modelBuilder.Entity("Hospital.Models.Payroll", b =>
                 {
                     b.HasOne("Hospital.Models.ApplicationUser", "EmployeeId")
-                        .WithMany("Payrolls")
+                        .WithMany()
                         .HasForeignKey("EmployeeIdId");
 
                     b.Navigation("EmployeeId");
@@ -954,9 +954,7 @@ namespace Hospital.Repositories.Migrations
                 {
                     b.HasOne("Hospital.Models.Department", "Department")
                         .WithMany("Employees")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentId");
 
                     b.Navigation("Department");
                 });
@@ -993,11 +991,6 @@ namespace Hospital.Repositories.Migrations
             modelBuilder.Entity("Hospital.Models.Supplier", b =>
                 {
                     b.Navigation("MedicineReports");
-                });
-
-            modelBuilder.Entity("Hospital.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Payrolls");
                 });
 #pragma warning restore 612, 618
         }
