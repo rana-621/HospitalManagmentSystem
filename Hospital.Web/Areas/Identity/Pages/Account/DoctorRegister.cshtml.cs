@@ -3,6 +3,7 @@
 #nullable disable
 
 using Hospital.Models;
+using hospitals.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -20,13 +21,15 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private IWebHostEnvironment _env;
 
         public DoctorRegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IWebHostEnvironment env)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -34,6 +37,7 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _env = env;
         }
 
         /// <summary>
@@ -54,6 +58,7 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public IWebHostEnvironment Env { get => _env; set => _env = value; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -127,9 +132,9 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
                 user.IsDoctor = Input.IsDoctor;
                 user.Specialist = Input.Specialist;
 
-                //ImageOperations image = new ImageOperations();
-                //string fileName = image.ImageUpload(Input.PictureUrl);
-
+                ImageOperations image = new ImageOperations(Env);
+                string fileName = image.ImageUpload(Input.PictureUrl);
+                user.PictureUrl = fileName;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
