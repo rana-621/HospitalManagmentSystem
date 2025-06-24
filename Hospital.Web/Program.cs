@@ -22,7 +22,7 @@ namespace Hospital.Web
 
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
             //Mapping 
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
@@ -32,6 +32,8 @@ namespace Hospital.Web
             builder.Services.AddTransient<IRoomService, RoomService>();
             builder.Services.AddTransient<IContactService, ContactService>();
             builder.Services.AddRazorPages();
+
+
 
             var app = builder.Build();
 
@@ -53,6 +55,13 @@ namespace Hospital.Web
             app.MapControllerRoute(
                 name: "areas",
                 pattern: "{Area=Admin}/{controller=Hospital}/{action=Index}/{id?}");
+
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                dbInitializer.Intailize();
+            }
 
 
             app.Run();

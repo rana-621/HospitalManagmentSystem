@@ -124,10 +124,10 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
-                user.UserName = Input.Name;
+                user.Name = Input.Name;
                 user.Address = Input.Address;
                 user.Nationality = Input.Nationality;
-                user.DOF = Input.DOB;
+                user.DOB = Input.DOB;
                 user.Gender = Input.Gender;
                 user.IsDoctor = Input.IsDoctor;
                 user.Specialist = Input.Specialist;

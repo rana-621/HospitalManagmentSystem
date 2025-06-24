@@ -2,22 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
+using Hospital.Models;
+using hospitals.Utilities;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace Hospital.Web.Areas.Identity.Pages.Account
 {
@@ -29,13 +24,15 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private IWebHostEnvironment _env;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IWebHostEnvironment env)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +40,7 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _env = env;
         }
 
         /// <summary>
@@ -97,6 +95,15 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+            public string Name { get; set; }
+            public Gender Gender { get; set; }
+            public string Nationality { get; set; }
+            public string Address { get; set; }
+            public DateTime DOB { get; set; }
+
+            public IFormFile PictureUrl { get; set; }
         }
 
 
@@ -114,6 +121,18 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                user.Name = Input.Name;
+                user.Address = Input.Address;
+                user.Nationality = Input.Nationality;
+                user.DOB = Input.DOB;
+                user.Gender = Input.Gender;
+
+
+                ImageOperations image = new ImageOperations(_env);
+                string fileName = image.ImageUpload(Input.PictureUrl);
+                user.PictureUrl = fileName;
+
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -121,6 +140,8 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    await _userManager.AddToRoleAsync(user, WebSiteRoles.Website_Patient);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -154,11 +175,11 @@ namespace Hospital.Web.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {
