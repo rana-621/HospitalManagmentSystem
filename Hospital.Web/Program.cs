@@ -32,6 +32,7 @@ namespace Hospital.Web
             builder.Services.AddTransient<IRoomService, RoomService>();
             builder.Services.AddTransient<IContactService, ContactService>();
             builder.Services.AddTransient<IApplicationUserService, ApplicationUserService>();
+            builder.Services.AddTransient<IDoctorService, DoctorService>();
             builder.Services.AddRazorPages();
 
 
