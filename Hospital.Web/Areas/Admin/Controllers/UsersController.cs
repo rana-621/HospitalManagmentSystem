@@ -17,5 +17,10 @@ namespace Hospital.Web.Areas.Admin.Controllers
         {
             return View(_applicationUserService.GetAll(PageNumber, PageSize));
         }
+
+        public IActionResult AllDoctors(int PageNumber = 1, int PageSize = 10)
+        {
+            return View(_applicationUserService.GetAllDoctor(PageNumber, PageSize));
+        }
     }
 }
