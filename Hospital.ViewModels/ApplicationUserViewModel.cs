@@ -7,6 +7,8 @@ public class ApplicationUserViewModel
 
     public List<ApplicationUser> Doctors { get; set; } = new List<ApplicationUser>();
     public string Name { get; set; }
+    public string Email { get; set; }
+    public string UserName { get; set; }
     public string City { get; set; }
     public Gender Gender { get; set; }
     public bool IsDoctor { get; set; }
@@ -23,6 +25,9 @@ public class ApplicationUserViewModel
         Gender = user.Gender;
         IsDoctor = user.IsDoctor;
         Specilist = user.Specialist;
+        Email = user.Email;
+        UserName = user.UserName;
+
 
     }
 
@@ -34,7 +39,9 @@ public class ApplicationUserViewModel
             City = user.City,
             Gender = user.Gender,
             IsDoctor = user.IsDoctor,
-            Specialist = user.Specilist
+            Specialist = user.Specilist,
+            Email = user.Email,
+            UserName = user.UserName
 
         };
     }
