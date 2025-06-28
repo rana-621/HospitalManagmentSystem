@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Welcome to the Hospital App</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+
+        <div class="col">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Doctor Registration</h5>
+                    <p class="card-text">Register new doctors, set their specialty, and upload their data.</p>
+                    <a href="/Identity/Account/Register" class="btn btn-primary">Register Doctor</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Timings</h5>
+                    <p class="card-text">Setup and manage doctors' morning and afternoon shifts easily.</p>
+                    <a href="/Timing/AddTiming" class="btn btn-primary">Add Timing</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Patient Records</h5>
+                    <p class="card-text">View and manage patient records and history.</p>
+                    <a href="/Patient/Index" class="btn btn-primary">View Patients</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Reports</h5>
+                    <p class="card-text">Generate reports for appointments, doctors, and more.</p>
+                    <a href="/Reports/Index" class="btn btn-primary">View Reports</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,9 +1,10 @@
-using System.Diagnostics;
 using Hospital.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
-namespace Hospital.Web.Controllers
+namespace Hospital.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
