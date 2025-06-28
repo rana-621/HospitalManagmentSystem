@@ -1,5 +1,4 @@
 ﻿using Hospital.Models;
-using Hospital.ViewModels.Helpers;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Hospital.ViewModels;
@@ -7,8 +6,9 @@ namespace Hospital.ViewModels;
 public class TimingViewModel
 {
     public int Id { get; set; }
-    public ApplicationUser DoctorId { get; set; }
-    public DateTime Date { get; set; }
+    public Guid DoctorId { get; set; }
+    public ApplicationUser Doctor { get; set; }
+    public DateTime ScheduleDate { get; set; }
     public int MorningShiftStartTime { get; set; }
     public int MorningShiftEndTime { get; set; }
     public int AfternoonShiftStartTime { get; set; }
@@ -16,15 +16,11 @@ public class TimingViewModel
     public int Duration { get; set; } // Duration in minutes
     public Status Status { get; set; }
 
-    //List<TimeSelectList> morningShiftStart = new List<SelectListItem>();
-    //List<SelectListItem> morningShiftEnd = new List<SelectListItem>();
-    //List<SelectListItem> afternoonShiftStart = new List<SelectListItem>();
-    //List<SelectListItem> afternoonShiftEnd = new List<SelectListItem>();
+    List<SelectListItem> morningShiftStart = new List<SelectListItem>();
+    List<SelectListItem> morningShiftEnd = new List<SelectListItem>();
+    List<SelectListItem> afternoonShiftStart = new List<SelectListItem>();
+    List<SelectListItem> afternoonShiftEnd = new List<SelectListItem>();
 
-    public List<SelectListItem> MorningShiftStart => TimeSelectListHelper.GetMorningShiftStartTimes();
-    public List<SelectListItem> MorningShiftEnd => TimeSelectListHelper.GetMorningShiftEndTimes();
-    public List<SelectListItem> AfternoonShiftStart => TimeSelectListHelper.GetAfternoonShiftStartTimes();
-    public List<SelectListItem> AfternoonShiftEnd => TimeSelectListHelper.GetAfternoonShiftEndTimes();
 
 
 
@@ -35,7 +31,7 @@ public class TimingViewModel
     public TimingViewModel(Timing model)
     {
         Id = model.Id;
-        Date = model.Date;
+        ScheduleDate = model.Date;
         MorningShiftStartTime = model.MorningShiftStartTime;
         MorningShiftEndTime = model.MorningShiftEndTime;
         AfternoonShiftStartTime = model.AfternoonShiftStartTime;
@@ -51,7 +47,7 @@ public class TimingViewModel
         return new Timing
         {
             Id = model.Id,
-            Date = model.Date,
+            Date = model.ScheduleDate,
             MorningShiftStartTime = model.MorningShiftStartTime,
             MorningShiftEndTime = model.MorningShiftEndTime,
             AfternoonShiftStartTime = model.AfternoonShiftStartTime,
